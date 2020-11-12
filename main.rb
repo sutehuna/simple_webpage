@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 require 'sinatra/reloader'
 require_relative 'simple_io'
 require_relative 'simple_file'
-
 
 enable :method_override
 
@@ -52,8 +53,3 @@ delete '/memos/:number' do |n|
   SimpleIO.delete(n)
   redirect to('/')
 end
-
-
-
-
-

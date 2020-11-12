@@ -1,8 +1,10 @@
+# frozen_string_literal: true
 
 require 'rexml/document'
 require_relative './simple_file'
 require 'fileutils'
 
+# class for read and write xml file
 class SimpleIO
   class << self
     def read(number)
