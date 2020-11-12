@@ -1,0 +1,17 @@
+
+<table>
+  <thead>
+    <tr>
+      <th class="title"><%=@file.title%></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text"><%=@file.text%></td>
+    </tr>
+  </tbody>
+</table>
+<form action="/memos/<%=@file.id%>" method="post">
+<input type="button" onclick="location.href='/memos/<%=@file.id%>/edit'" class="button"value="変更">
+<button type="hidden" name="_method"  value="delete" class="button" id="delete">削除</button>
+</form>
