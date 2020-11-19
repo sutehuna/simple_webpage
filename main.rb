@@ -27,15 +27,21 @@ get '/new' do
 end
 
 get '/memos/:number' do |n|
-  @file = SimpleIO.read(n)
-  @number = n
-  erb :show
+  if SimpleIO.exist?(n)
+    @file = SimpleIO.read(n)
+    erb :show
+  else
+    redirect to('/')
+  end
 end
 
 get '/memos/:number/edit' do |n|
-  @file = SimpleIO.read(n)
-  @number = n
-  erb :edit
+  if SimpleIO.exist?(n)
+    @file = SimpleIO.read(n)
+    erb :edit
+  else
+    redirect to('/')
+  end
 end
 
 post '/memos' do

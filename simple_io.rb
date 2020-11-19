@@ -7,9 +7,9 @@ require 'fileutils'
 # class for read and write xml file
 class SimpleIO
   class << self
-    def read(number)
-      xml = REXML::Document.new(File.new("public/files/#{number}.xml"))
-      SimpleFile.new(number, xml.elements['root/title'].text, xml.elements['root/text'].text)
+    def read(id)
+      xml = REXML::Document.new(File.new(filepath(id)))
+      SimpleFile.new(id, xml.elements['root/title'].text, xml.elements['root/text'].text)
     end
 
     def read_all
@@ -20,13 +20,21 @@ class SimpleIO
     end
 
     def write(file)
-      File.open("public/files/#{file.id}.xml", 'w') do |f|
+      File.open(filepath(file.id), 'w') do |f|
         f.write("<root><title>#{file.title}</title><text>#{file.text}</text></root>")
       end
     end
 
     def delete(id)
-      FileUtils.rm("public/files/#{id}.xml")
+      FileUtils.rm(filepath(id))
+    end
+
+    def exist?(id)
+      File.exist?(filepath(id))
+    end
+
+    def filepath(id)
+      "public/files/#{id}.xml"
     end
   end
 end
