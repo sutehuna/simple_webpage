@@ -38,9 +38,9 @@ get '/memos/:number/edit' do |n|
   erb :edit
 end
 
-post '/memos/:number' do |n|
-  @max_id = n
-  SimpleIO.write(SimpleFile.new(n, params[:title], params[:text]))
+post '/memos' do
+  @max_id += 1
+  SimpleIO.write(SimpleFile.new(@max_id, params[:title], params[:text]))
   redirect to('/')
 end
 
