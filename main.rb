@@ -51,7 +51,9 @@ post '/memos' do
 end
 
 patch '/memos/:number' do |n|
-  SimpleIO.write(SimpleFile.new(n, params[:title], params[:text]))
+  if SimpleIO.exist?(n)
+    SimpleIO.write(SimpleFile.new(n, params[:title], params[:text]))
+  end
   redirect to('/')
 end
 
