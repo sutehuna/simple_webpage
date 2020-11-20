@@ -31,7 +31,7 @@ get '/memos/:number' do |n|
     @file = SimpleIO.read(n)
     erb :show
   else
-    redirect to('/')
+    erb :not_found
   end
 end
 
@@ -40,7 +40,7 @@ get '/memos/:number/edit' do |n|
     @file = SimpleIO.read(n)
     erb :edit
   else
-    redirect to('/')
+    erb :not_found
   end
 end
 
@@ -53,11 +53,16 @@ end
 patch '/memos/:number' do |n|
   if SimpleIO.exist?(n)
     SimpleIO.write(SimpleFile.new(n, params[:title], params[:text]))
+  else
+    erb :not_found
   end
-  redirect to('/')
 end
 
 delete '/memos/:number' do |n|
   SimpleIO.delete(n)
   redirect to('/')
+end
+
+not_found do
+  erb :not_found
 end
