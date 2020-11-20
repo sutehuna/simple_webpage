@@ -6,8 +6,8 @@ class SimpleFile
 
   def initialize(id, title, text)
     @id = id
-    @title = title
-    @text = text
+    @title = title.encode(:xml => :text)
+    @text = text.encode(:xml => :text)
   end
 
   def to_s
