@@ -53,6 +53,7 @@ end
 patch '/memos/:number' do |n|
   if SimpleIO.exist?(n)
     SimpleIO.write(SimpleFile.new(n, params[:title], params[:text]))
+    redirect to('/')
   else
     erb :not_found
   end
