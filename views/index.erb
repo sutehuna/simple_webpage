@@ -1,5 +1,6 @@
 <input class="button" type="button" onclick="location.href='./new'" value="追加">
 <div class="titleboxs">
-<%= @titles %>
+  <% titleboxs = @files.nil? ? '' : @files.map { |f| "<a class=\"titlebox\" href=\"/memos/#{f.id}\">#{h f.title}</a>" }.join("<br>\n") %>
+  <%= titleboxs %>
 </div>
 
