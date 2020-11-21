@@ -71,7 +71,7 @@ class SimpleIO
 
     def create_table_if_necessary
       pgsession do |t|
-        if t.exec("SELECT EXISTS (SELECT table_name FROM information_schema.columns WHERE table_name = 'simple_files')")[0]['exists'] == 'f'
+        if t.exec("SELECT EXISTS (SELECT table_name FROM information_schema.columns WHERE table_name = '#{TABLE}')")[0]['exists'] == 'f'
           t.exec("CREATE TABLE #{TABLE} ( id integer, title varchar(5000), text varchar(5000), primary key (id))")
         end
       end
