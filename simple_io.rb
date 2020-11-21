@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-require 'rexml/document'
 require_relative './simple_file'
 require 'fileutils'
 require 'pg'
 require 'active_support'
 require 'active_support/core_ext'
 
-# class for read and write xml file
+# class for IO
 class SimpleIO
   class << self
     def read(id)
