@@ -1,9 +1,9 @@
 <form action="/memos/<%=@file.id%>" method="post">
 <div>
-  <input type="text" value="<%=@file.title%>" name="title" class="title">
+  <input type="text" value="<%=h @file.title%>" name="title" class="title">
 <div>
 </div>
-  <textarea name="text" class="text"><%=@file.text%></textarea>
+  <textarea name="text" class="text"><%=h @file.text%></textarea>
 </div>
 <button type="hidden" name="_method" class="button" value="patch">保存</button>
 </form>

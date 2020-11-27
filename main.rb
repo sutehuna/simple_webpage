@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 # frozen_string_literal: true
 
 require 'sinatra'
@@ -7,18 +8,18 @@ require_relative 'simple_file'
 
 enable :method_override
 
-before do
-  update_max_id
-end
-
 helpers do
-  def update_max_id
-    @max_id = SimpleIO.read_all.map { |f| f.id.to_i }.max || 0
+  def max_id
+    SimpleIO.max_id
+  end
+
+  def h(text)
+    Rack::Utils.escape_html(text)
   end
 end
 
 get '/' do
-  @titles = SimpleIO.read_all.map { |f| "<a class=\"titlebox\" href=\"/memos/#{f.id}\">#{f.title}</a>" }.join("<br>\n")
+  @files = SimpleIO.read_all
   erb :index
 end
 
@@ -45,14 +46,13 @@ get '/memos/:number/edit' do |n|
 end
 
 post '/memos' do
-  @max_id += 1
-  SimpleIO.write(SimpleFile.new(@max_id, params[:title], params[:text]))
+  SimpleIO.write(SimpleFile.new(max_id + 1, params[:title], params[:text]))
   redirect to('/')
 end
 
 patch '/memos/:number' do |n|
   if SimpleIO.exist?(n)
-    SimpleIO.write(SimpleFile.new(n, params[:title], params[:text]))
+    SimpleIO.update(SimpleFile.new(n, params[:title], params[:text]))
     redirect to('/')
   else
     erb :not_found
