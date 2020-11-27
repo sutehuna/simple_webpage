@@ -1,7 +1,0 @@
-<settings>
-<host>localhost</host>
-<user>postgres</user>
-<password>postgres</password>
-<dbname>dev</dbname>
-<port>5432</port>
-</settings>

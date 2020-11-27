@@ -58,14 +58,17 @@ class SimpleIO
     end
 
     def pgsession
-      conn = PG.connect(CONF)
-      conn.transaction { |t| @result = yield t }
-      conn.finish
+      begin
+        conn = PG.connect(CONF)
+        conn.transaction { |t| @result = yield t }
+      ensure
+        conn.finish
+      end
       @result
     end
 
     def conf
-      Hash.from_xml(open('public/conf.xml'))['settings']
+      Hash.from_xml(open('db_conf/conf.xml'))['settings']
     end
 
     def create_table_if_necessary

@@ -13,7 +13,6 @@ end
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'redcarpet'
-gem 'puma'
 gem 'thin'
 gem 'activesupport'
 gem 'pg'
